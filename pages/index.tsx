@@ -9,14 +9,21 @@ const Home: NextPage = () => {
   const fileUpload = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let fileObj = [];
+    let fileObj: any = [];
     let fileArray: Array<string> = [];
     if (fileUpload.current) {
       fileObj.push(fileUpload.current.files);
+      console.log();
+      const sortedArr: Array<any> = Array.from(fileObj[0]).sort(
+        (a: any, b: any) => {
+          return a.name.localeCompare(b.name);
+        }
+      );
+      console.log(sortedArr);
       if (fileObj[0] !== null) {
-        for (let i = 0; i < fileObj[0].length; i++) {
+        for (let i = 0; i < sortedArr.length; i++) {
           if (fileObj[0][i].type === "application/pdf") {
-            fileArray.push(URL.createObjectURL(fileObj[0][i]));
+            fileArray.push(URL.createObjectURL(sortedArr[i]));
           } else {
             updateError("One of those was not a PDF, try again.");
             return;
@@ -63,8 +70,11 @@ const Home: NextPage = () => {
       >
         GitHub Repo
       </a>
-      <h1 className="text-4xl font-black mb-10">
+      <h1 className="text-4xl font-black mb-2">
         Select multiple files and it will combine them into one
+      </h1>
+      <h1 className="text-xl font-black mb-10">
+        It organise the files alphabetically by file name
       </h1>
 
       <input
