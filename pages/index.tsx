@@ -26,8 +26,7 @@ const Home: NextPage = () => {
         await merger.add(file);
       }
 
-      console.log(merger);
-      const mergedPdf = await merger.saveAsBlob();
+      const mergedPdf = await (merger as any).saveAsBlob();
       const url = URL.createObjectURL(mergedPdf);
       const what = await fetch(url);
       updateUrl(url);
