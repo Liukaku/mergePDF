@@ -4,7 +4,7 @@ import PDFMerger from "pdf-merger-js";
 import { ChangeEvent, HTMLInputTypeAttribute, useRef, useState } from "react";
 
 const Home: NextPage = () => {
-  const [mergedPdfUrl, updateUrl] = useState();
+  const [mergedPdfUrl, updateUrl] = useState<string>();
   const fileUpload = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
